@@ -103,7 +103,9 @@ install_debian_dependencies() {
 create_venv(){
   echo "Creating python virtual environment. "
   python3 -m venv "$VENV_PATH"
-  $VENV_PATH/bin/python -m pip install -r $PIP_REQUIREMENTS_FILE > /dev/null &
+  # 激活虚拟环境并设置清华大学的镜像源
+  source "$VENV_PATH/bin/activate"
+  $VENV_PATH/bin/pip install -r $PIP_REQUIREMENTS_FILE -i https://pypi.tuna.tsinghua.edu.cn/simple > /dev/null &
   show_loader "\tInstalling python dependencies. "
 }
 
